@@ -17,6 +17,25 @@
 
 This module will respect the major and minor versions of the included `libheif`, with the patch version representing changes in this module itself. For the exact version of `libheif`, please see the [install script](scripts/install.js).
 
+## Usage on browesrs and Deno
+
+```js
+import libheif_init from "https://code4fukui.github.io/libheif-js/libheif-wasm/libheif-bundle.mjs";
+
+const libheif = libheif_init();
+
+const file = await Deno.readFile('./temp/0002.heic');
+
+const decoder = new libheif.HeifDecoder();
+const data = decoder.decode(file);
+// data in an array holding all images inside the heic file
+
+const image = data[0];
+const width = image.get_width();
+const height = image.get_height();
+console.log(image, width, height);
+```
+
 ## Install
 
 ```bash
